@@ -1,17 +1,51 @@
+# Finding the Middle of Linked List
 
 def findMid(head):
-    val1 = Linked_List()
-    val2 = Linked_List()
-    val1.head = head
-    val2.head = head
-    if val1.head is None :
+    fastPtr = Linked_List()    # Take two different pointer.
+    slowPtr = Linked_List()    # fastPtr will move double the slowPtr each time till it reaches end.
+    fastPtr.head = head        # As soon as fastPtr reaches end, slowPtr will be on the middle element.
+    slowPtr.head = head
+    if fastPtr.head is None :
         return head
-    while val1.head.next is not None :
-        val1.head = val1.head.next
-        val2.head = val2.head.next
-        if val1.head.next is not None :
-            val1.head = val1.head.next
+    while fastPtr.head.next is not None :
+        fastPtr.head = fastPtr.head.next
+        slowPtr.head = slowPtr.head.next
+        if fastPtr.head.next is not None :
+            fastPtr.head = fastPtr.head.next
             
-    return val2.head
+    return slowPtr.head
     
     
+#  Node Class 
+class node : 
+  def __init__(self,val) :
+    self.data = val
+    self. next = None
+#  Linked List Class
+class Linked_List:
+  def __init__(self):
+    self.head = None
+    
+   def insert(self,val):
+    if self.head == None :
+      self.head = node(val)
+    else :
+      new_node = node(val)
+      temp = self.head
+      while(temp.next):
+        temp = temp.next
+       temp.next = new_node
+      
+def createList(arr,n) :
+  lis = Linked_List()
+  for i in range(n):
+    lis.insert(arr[i])
+    return lis.head 
+
+if __name__ =='__main__':
+  t =int(input())
+  for i in range(t):
+    n = int(input())
+    arr = list(map(int,input().strip().split()))
+    head = createList(arr,n)
+    print(findMid(head).data)
