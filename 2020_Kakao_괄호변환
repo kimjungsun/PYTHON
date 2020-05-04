@@ -1,25 +1,16 @@
+
 def solution(p):
-    cnt_l = cnt_r = 0  # 각각 '(' , ')'의 개수를 의미함
     flag = 1    # 올바른 문자열 여부 체크 
-    
-    if len(p)== 0 : return ''
-    u = ''
+    if p=='': return ''
+    u=''
     for i in range(0,len(p)):
         u += p[i]
         if u.count('(') < u.count(')'):
             flag = 0
         elif u.count('(') == u.count(')') : 
             v = p[i+1:]
-            break
-        
-            
-    if flag == 1 :  # u가 올바른 문자열인 경우
-        return u + solution(v)
-    
-    else :  
-        tmp = '(' + solution(v) +')' 
-        for i in u[1:-1] :
-            if i == '(': tmp += ')'
-            else : tmp += '('
-        
-        return tmp
+            if flag == 1 :  # u가 올바른 문자열인 경우
+                return u + solution(v)
+            else :  
+                tmp = '(' + solution(v) +')' +''.join(list(map(lambda x: '(' if x==')'else ')',u[1:-1])))
+                return tmp
