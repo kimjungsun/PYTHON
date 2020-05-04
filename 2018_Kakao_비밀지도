@@ -1,0 +1,21 @@
+def solution(n, arr1, arr2):
+    new = [0]*n
+    for i in range(n):
+        new[i] = arr1[i]|arr2[i]
+    tmp = ""
+    res = []
+    for i in range(n):
+        for j in range(n):
+            if new[i]&1== 1 :
+                tmp = '#' + tmp
+            else : 
+                tmp = ' ' + tmp
+            new[i] = int(new[i]/2)
+        res.append(tmp) 
+        tmp = ""
+         
+    return res
+    
+    
+    
+    # bit 연산자 문제
